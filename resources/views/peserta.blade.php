@@ -62,7 +62,7 @@
 
                 <div class="row">
                     <div class="card border-0 rounded-0 shadow p-0">
-                        <div class="card-header d-flex justify-content-between">
+                        <div class="card-header bg-info text-light rounded-0 border-0 d-flex justify-content-between">
                             <p class="py-1 m-0">Detail Informasi</p>
                         </div>
                         <div class="card-body">

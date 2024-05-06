@@ -55,18 +55,18 @@ class PesertaController extends Controller
             'password' => $request->password,
             'jurusan_id' => $request->jurusan,
         ]);
-            Alert::success("Selamat", 'data berhasil di buat');
+        Alert::success("Selamat", 'data berhasil di buat');
         return redirect()->route('peserta.index');
     }
 
     public function register(Request $request)
     {
         $request->validate([
-            'nama' => 'required|min:3|max:100|unique:peserta,nama',
+            'nama' => 'required|min:3|max:100',
             'tempat' => 'required',
             'tanggal' => 'required',
             'alamat' => 'required',
-            'telepon' => 'required|unique:peserta,telepon',
+            'telepon' => 'required',
             'email' => 'required|unique:peserta,email',
             'password' => 'required|min:5',
             'jurusan' => 'required',
@@ -81,7 +81,8 @@ class PesertaController extends Controller
             'password' => $request->password,
             'jurusan_id' => $request->jurusan,
         ]);
-        return redirect()->route('plogin');
+        Alert::success('Selamat', 'register berhasil, silahkan login');
+        return redirect()->route('loginp');
     }
 
     public function login(Request $request)
@@ -91,7 +92,8 @@ class PesertaController extends Controller
         if (count($login) > 0) {
             session_start();
             $_SESSION['id'] = $login[0];
-             return redirect()->route('home');
+            Alert::success("Welcome ", $_SESSION['id']->nama . ' di halaman home');
+            return redirect()->route('home');
         } else {
             Alert::warning('Maaf', 'email atau password salah');
             return redirect()->route('loginp');
@@ -102,8 +104,8 @@ class PesertaController extends Controller
     {
         session_start();
         unset($_SESSION['id']);
-session_destroy();
- return redirect()->route('/');
+        session_destroy();
+        return redirect()->route('/');
     }
 
     /**
@@ -122,7 +124,7 @@ session_destroy();
         $jurusan = Jurusan::all();
         $peserta = Peserta::findOrFail($id);
         return view('peserta.edit', compact('peserta', 'jurusan'));
-         // $gambar = $request->gambar;
+        // $gambar = $request->gambar;
         // $namaFile = time() . rand(100, 999) . '.' . $gambar->getClientOriginalExtension();
         // $gambar->move(public_path() . '/upload', $namaFile);
     }
@@ -133,16 +135,29 @@ session_destroy();
     public function update(Request $request, $id)
     {
         $peserta = Peserta::findOrFail($id);
-        $request->validate([
-            'nama' => 'required|min:3|max:100',
-            'tempat' => 'required',
-            'tanggal' => 'required',
-            'alamat' => 'required',
-            'telepon' => 'required',
-            'email' => 'required',
-            'password' => 'required|min:5',
-            'jurusan' => 'required',
-        ]);
+        if ($peserta->email != $request->email) {
+            $request->validate([
+                'nama' => 'required|min:3|max:100',
+                'tempat' => 'required',
+                'tanggal' => 'required',
+                'alamat' => 'required',
+                'telepon' => 'required',
+                'email' => 'required|unique:peserta,email',
+                'password' => 'required|min:5',
+                'jurusan' => 'required',
+            ]);
+        } else {
+            $request->validate([
+                'nama' => 'required|min:3|max:100',
+                'tempat' => 'required',
+                'tanggal' => 'required',
+                'alamat' => 'required',
+                'telepon' => 'required',
+                'email' => 'required',
+                'password' => 'required|min:5',
+                'jurusan' => 'required',
+            ]);
+        }
         $peserta->update([
             'nama' => $request->nama,
             'tempat_lahir' => $request->tempat,
@@ -153,7 +168,7 @@ session_destroy();
             'password' => $request->password,
             'jurusan_id' => $request->jurusan,
         ]);
-            Alert::success("Selamat", 'data berhasil di update');
+        Alert::success("Selamat", 'data berhasil di update');
         return redirect()->route('peserta.index');
     }
 
@@ -164,7 +179,7 @@ session_destroy();
     {
         $peserta = Peserta::findOrFail($id);
         $peserta->delete();
-            Alert::success("Selamat", 'data berhasil di hapus');
+        Alert::success("Selamat", 'data berhasil di hapus');
 
         return redirect()->route('peserta.index');
     }

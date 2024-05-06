@@ -59,7 +59,7 @@
                 <div class="section-title">
                     <h2>Login</h2>
                 </div>
-                <p class="text-center"><a href="{{ route('login') }}" class="rounded-0 btn-outline-danger btn ">Login
+                <p class="text-center"><a href="{{ route('login') }}" class="rounded-0 text-light shadow btn-info btn ">Login
                         sebagai Admin</a>
                 </p>
                 <div class="row justify-content-center">
@@ -76,7 +76,7 @@
                                     placeholder="masukkan password" required>
                             </div>
                             <p class="mt-3 small">belum punya akun? <a href="{{ route('registerp') }}">register</a></p>
-                            <div class="text-center mt-3"><button class="btn btn-info rounded-0 text-light"
+                            <div class="text-center mt-3"><button class="btn shadow btn-info rounded-0 text-light"
                                     type="submit">Login</button></div>
                         </form>
                     </div>
