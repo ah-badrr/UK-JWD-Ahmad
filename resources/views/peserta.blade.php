@@ -61,8 +61,10 @@
                 </div>
 
                 <div class="row">
-                    <div class="card">
-                        <div class="card-header">Detail Informasi</div>
+                    <div class="card border-0 rounded-0 shadow p-0">
+                        <div class="card-header d-flex justify-content-between">
+                            <p class="py-1 m-0">Detail Informasi</p>
+                        </div>
                         <div class="card-body">
                             <table cellpadding="1" cellspacing="2">
                                 <tbody>

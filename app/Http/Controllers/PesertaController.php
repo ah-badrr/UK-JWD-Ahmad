@@ -81,7 +81,7 @@ class PesertaController extends Controller
             'password' => $request->password,
             'jurusan_id' => $request->jurusan,
         ]);
-        return redirect()->route('loginp');
+        return redirect()->route('plogin');
     }
 
     public function login(Request $request)

@@ -20,13 +20,11 @@ Route::get('/loginp', function () {
 Route::get('/home', function () {
     session_start();
     if (!$_SESSION) {
-        return redirect()->route('/');
+        return redirect()->route('loginp');
         session_destroy();
     }
     return view('peserta');
 })->name('home');
-
-Route::get('/plogout', [PesertaController::class, 'logout'])->name('plogout');
 
 Route::get('/registerp', function () {
     $jurusan = Jurusan::all();
@@ -47,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/peserta', PesertaController::class);
 });
 
+Route::get('/plogout', [PesertaController::class, 'logout'])->name('plogout');
 Route::post('/pregister', [PesertaController::class, 'register'])->name('pregister');
 Route::post('/plogin', [PesertaController::class, 'login'])->name('plogin');
 require __DIR__.'/auth.php';

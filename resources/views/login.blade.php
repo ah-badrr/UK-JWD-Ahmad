@@ -35,7 +35,7 @@
 
 <body>
     @include('sweetalert::alert')
-    <header id="header" class="fixed-top header-transparent">
+    <header id="header" class="sticky-top ">
         <div class="container d-flex align-items-center justify-content-between position-relative">
 
             <div class="logo">
